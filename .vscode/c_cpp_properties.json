@@ -5,7 +5,8 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/Src/Common",
-                "${workspaceFolder}/Src/MCAL/Inc"
+                "${workspaceFolder}/Src/MCAL/Inc",
+                "${workspaceFolder}/Src/Config"
             ],
             "defines": [
                 "_DEBUG",

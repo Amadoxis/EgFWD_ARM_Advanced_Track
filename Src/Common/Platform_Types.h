@@ -14,9 +14,9 @@
 #define _Bool unsigned char
 #endif
 
-#define CPU_TYPE 						CPU_TYPE_32
-#define CPU_BIT_ORDER 					MSB_FIRST
-#define CPU_BYTE_ORDER					HIGH_BYTE_FIRST
+// #define CPU_TYPE 						CPU_TYPE_32
+// #define CPU_BIT_ORDER 					MSB_FIRST
+// #define CPU_BYTE_ORDER					HIGH_BYTE_FIRST
 
 #ifndef FALSE
 #define FALSE 							(boolean)false
