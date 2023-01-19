@@ -23,5 +23,6 @@
  *                                     API Prototypes                                  *
 ****************************************************************************************/
 void IntCtrl_Init(User_Config_IRQ_Type* S_UserConfig);
+void IntCtrl_Set_CallBack(void*PF_CallBackAddress(), IntVectors_Type IRQ_Vector);
 
 #endif /*INTCTRL_H_*/

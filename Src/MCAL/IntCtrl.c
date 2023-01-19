@@ -21,7 +21,7 @@
 /***************************************************************************************
  *                                       Local Data                                    *
  ****************************************************************************************/
-
+void (* PF_CallBack[154])();
 /***************************************************************************************
  *                                       Global Data                                   *
  ****************************************************************************************/
@@ -85,7 +85,8 @@ void IntCtrl_ConfigPriority(IntVectors_Type E_IntNum, uint8 u8_InteruptPriority)
 void IntCtrl_EnableIRQ(IntVectors_Type E_IntNum){
     if(E_IntNum>SysTick_IRQ){
         uint8 u8_InterruptNum=E_IntNum;
-        SET_BIT(EN(u8_InterruptNum-16), u8_InterruptNum-32UL);
+        u8_InterruptNum-=16UL;
+        SET_BIT(EN(u8_InterruptNum), u8_InterruptNum%32UL);
     }
     else{
         switch (E_IntNum)
@@ -113,6 +114,35 @@ void IntCtrl_EnableIRQ(IntVectors_Type E_IntNum){
     }
 }
 void IntCtrl_DisableIRQ(IntVectors_Type E_IntNum){
+        if(E_IntNum>SysTick_IRQ){
+        uint8 u8_InterruptNum=E_IntNum;
+        u8_InterruptNum-=16UL;
+        SET_BIT(DIS(u8_InterruptNum), u8_InterruptNum%32UL);
+    }
+    else{
+        switch (E_IntNum)
+        {
+        case Memory_Management_IRQ:
+            SYSHNDCTRL->B.MEM=0;
+            break;
+        case Bus_Fault_IRQ:
+            SYSHNDCTRL->B.BUS=0;
+            break;
+        case Usage_Fault_IRQ:
+            SYSHNDCTRL->B.USAGE=0;
+            break;
+        case SVCall_IRQ:
+            break;
+        case Debug_Monitor_IRQ:
+            break;
+        case PendSV_IRQ:
+            break;
+        case SysTick_IRQ:
+            break;
+        default:
+            break;
+        }
+    }
 }
 /***************************************************************************************
  *                                    API Implementations                              *
@@ -131,15 +161,17 @@ void IntCtrl_Init(User_Config_IRQ_Type *S_UserConfig){
     APINT = (0x05FA << 16) | (Int_Priority << 8);
     for (u8_i=1; u8_i <= 154; u8_i++)
     {
+        u8_Group_Priority=S_UserConfig->Group_Priority[u8_i];
+        u8_Sub_Group_Priority=S_UserConfig->Sub_Group_Priority[u8_i];
         /*Assign Grouping/Subgrouping priority in NVIC PRIx NVIC and SCB_SYSPRIx Registers*/
-#if Int_Priority == XXX
-        u8_IRQ_Priority = ((S_UserConfig->Group_Priority[u8_i]) & 0x7);
+#if   Int_Priority == XXX
+        u8_IRQ_Priority = ((u8_Group_Priority) & 0x7);
 #elif Int_Priority == XXY
-        u8_IRQ_Priority = (((S_UserConfig->Group_Priority[u8_i]) & 0x03) << 1UL) | ((S_UserConfig->Sub_Group_Priority[u8_i]) & 0x01);
+        u8_IRQ_Priority = (((u8_Group_Priority) & 0x03) << 1UL) | ((u8_Sub_Group_Priority) & 0x01);
 #elif Int_Priority == XYY
-        u8_IRQ_Priority = (((S_UserConfig->Group_Priority[u8_i]) & 0x01) << 2UL) | ((S_UserConfig->Sub_Group_Priority[u8_i]) & 0x03);
+        u8_IRQ_Priority = (((u8_Group_Priority) & 0x01) << 2UL) | ((u8_Sub_Group_Priority) & 0x03);
 #elif Int_Priority == YYY
-        u8_IRQ_Priority = ((S_UserConfig->Sub_Group_Priority[u8_i]) & 0x07);
+        u8_IRQ_Priority = ((u8_Sub_Group_Priority) & 0x07);
 #endif
         IntCtrl_ConfigPriority(u8_i, u8_IRQ_Priority);
         /*Enable/Disable based on user configuration in NVIC_ENx and SCB_Sys Registers*/
@@ -147,6 +179,14 @@ void IntCtrl_Init(User_Config_IRQ_Type *S_UserConfig){
             IntCtrl_EnableIRQ(u8_i);
         }
     }
+}
+
+void IntCtrl_Set_CallBack(void*PF_CallBackAddress(), IntVectors_Type IRQ_Vector){
+    PF_CallBack[IRQ_Vector]=PF_CallBackAddress;
+}
+
+void SysTick_Handler(){
+    (*PF_CallBack[SysTick_IRQ])();
 }
 
 /***************************************************************************************
