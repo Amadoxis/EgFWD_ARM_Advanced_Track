@@ -35,21 +35,18 @@
  *                                Local Function Prototypes                            *
  ***************************************************************************************/
 
-
-
 /***************************************************************************************
  *                                       Local Functions                               *
  ***************************************************************************************/
 /***************************************************************************************
  *                                    API Implementations                              *
  ***************************************************************************************/
-void SysTick_Init_Delay_ms(uint32 Delay){
-    uint32 u32_Result;
-    u32_Result= ((Delay*SYS_CLC)/1000);
+void SysTick_Init(uint32 Reload_Value){
     STCURRENT=0x000000;
-    STRELOAD=u32_Result;
+    STRELOAD=Reload_Value;
 }
 void SysTick_Start_Timer(){
+    STCTRL->B.CLK_SRC=1; /*Select System Clock*/
     STCTRL->B.ENABLE=1;
 }
 void SysTick_Stop_Timer(){
@@ -63,7 +60,7 @@ void SysTick_Interrupt_Disable(){
 }
 uint32 SysTick_Read_Current_Count(){
     uint32 u32_Current_Count = STCURRENT;
-    return STCURRENT;
+    return u32_Current_Count;
 }
 
 /***************************************************************************************
