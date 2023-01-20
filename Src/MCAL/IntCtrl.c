@@ -21,7 +21,7 @@
 /***************************************************************************************
  *                                       Local Data                                    *
  ****************************************************************************************/
-void (* PF_CallBack[154])();
+void (* PF_CallBack[154])(void);
 /***************************************************************************************
  *                                       Global Data                                   *
  ****************************************************************************************/
@@ -181,12 +181,14 @@ void IntCtrl_Init(User_Config_IRQ_Type *S_UserConfig){
     }
 }
 
-void IntCtrl_Set_CallBack(void*PF_CallBackAddress(), IntVectors_Type IRQ_Vector){
+void IntCtrl_Set_CallBack(void(*PF_CallBackAddress)(void), IntVectors_Type IRQ_Vector){
     PF_CallBack[IRQ_Vector]=PF_CallBackAddress;
 }
 
 void SysTick_Handler(){
+    if(PF_CallBack[SysTick_IRQ]!=NULL){
     (*PF_CallBack[SysTick_IRQ])();
+    }
 }
 
 /***************************************************************************************
