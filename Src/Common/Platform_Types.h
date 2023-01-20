@@ -14,6 +14,10 @@
 #define _Bool unsigned char
 #endif
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 // #define CPU_TYPE 						CPU_TYPE_32
 // #define CPU_BIT_ORDER 					MSB_FIRST
 // #define CPU_BYTE_ORDER					HIGH_BYTE_FIRST
