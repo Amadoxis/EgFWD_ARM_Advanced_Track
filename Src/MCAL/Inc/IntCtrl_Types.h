@@ -1,3 +1,15 @@
+/***************************************************************************************
+ *                                  File Description                                   *
+ *  Name: IntCtrl_Types.h                                                              *
+ *  Brief: Nested Vector Interrupt Controller Driver                                   *
+ *  Author: Ahmed M. Rizk                                                              *
+ *  Date: 14th of January 2023                                                         *
+ *                                                                                     *
+ * Details: ~Prebuild configs constant Macros                                          *
+ *          ~Config Struct                                                             *
+ *          ~Enum definitions                                                          *
+ *                                                                                     *
+ ****************************************************************************************/
 #ifndef INTCTRL_TYPES_H_
 #define INTCTRL_TYPES_H_
 
@@ -49,3 +61,6 @@ typedef struct{
 }User_Config_IRQ_Type;
 
 #endif /*INTCTRL_TYPES_H_ */
+/***************************************************************************************
+ *                               End of File: IntCtrl_Types.h                                *
+ ****************************************************************************************/

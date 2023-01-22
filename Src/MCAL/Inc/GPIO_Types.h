@@ -1,3 +1,15 @@
+/***************************************************************************************
+ *                                  File Description                                   *
+ *  Name: GPIO_Types.h                                                                 *
+ *  Brief: General Purpose Input/Output Driver                                         *
+ *  Author: Ahmed M. Rizk                                                              *
+ *  Date: 17th of January 2023                                                         *
+ *                                                                                     *
+ * Details: ~Prebuild configs constant Macros                                          *
+ *          ~Config Struct                                                             *
+ *          ~Enum definitions                                                          *
+ *                                                                                     *
+ ****************************************************************************************/
 #ifndef GPIO_TYPES_H_
 #define GPIO_TYPES_H_
 
@@ -82,3 +94,6 @@ typedef struct{
 }User_Config_GPIO_Type;
 
 #endif /*GPIO_TYPES_H_ */
+/***************************************************************************************
+ *                               End of File: GPIO_Types.h                             *
+ ****************************************************************************************/

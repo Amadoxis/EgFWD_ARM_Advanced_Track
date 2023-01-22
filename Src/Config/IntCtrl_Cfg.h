@@ -1,3 +1,13 @@
+/***************************************************************************************
+ *                                  File Description                                   *
+ *  Name: IntCtrl_Cfg.h                                                                *
+ *  Brief: Nested Vector Interrupt Controller Driver                                   *
+ *  Author: Ahmed M. Rizk                                                              *
+ *  Date: 14th of January 2023                                                         *
+ *                                                                                     *
+ * Details: ~Prebuild configurations selection                                         *                                                          *
+ *                                                                                     *
+ ****************************************************************************************/
 #ifndef INTCTRL_CFG_H_
 #define INTCTRL_CFG_H_
 
@@ -26,3 +36,6 @@
 
 
 #endif /*INTCTRL_CFG_H_ */
+/***************************************************************************************
+ *                               End of File: IntCtrl_Cfg.h                            *
+ ****************************************************************************************/

@@ -1,3 +1,13 @@
+/***************************************************************************************
+ *                                  File Description                                   *
+ *  Name: MCU_Hw.h                                                                     *
+ *  Brief: TivaC Hardware Header File                                                  *
+ *  Author: Ahmed M. Rizk                                                              *
+ *  Date: 14th of January 2023                                                         *
+ *                                                                                     *
+ * Details: ~Contains Registers and their Struct/Union bit field representations       *
+ *                                                                                     *
+ ****************************************************************************************/
 #ifndef MCU_HW_H_
 #define MCU_HW_H_
 
@@ -53,8 +63,8 @@ typedef struct{
 
 typedef struct{
     vuint32 _Reserved_1_[255]; /*gap between 0x000 and 0x400*/
-    vuint32 GPIODATA;
-    vuint32 GPIODIR;
+    vuint32 GPIODATA; /*Data Register*/
+    vuint32 GPIODIR;  /*Direction Register*/
     vuint32 GPIOIS;
     vuint32 GPIOIBE;
     vuint32 GPIOIEV;
@@ -64,9 +74,9 @@ typedef struct{
     vuint32 GPIOICR;
     vuint32 GPIOAFSEL;
     vuint32 _Reserved_2_[55]; /*gap between 0x420 and 0x500*/
-    vuint32 GPIODR2R;
-    vuint32 GPIODR4R;
-    vuint32 GPIODR8R;
+    vuint32 GPIODR2R; /*2 mA output*/
+    vuint32 GPIODR4R; /*4 mA output*/
+    vuint32 GPIODR8R; /*8 mA output*/
     vuint32 GPIOODR;
     vuint32 GPIOPUR;
     vuint32 GPIOPDR;
@@ -130,22 +140,18 @@ typedef union{
 #define SYSHNDCTRL  ((SYSHNDCTRL_Tag*) (Cortex_M4_Core_Peripherals_Base_Address+0xD24UL))
 
 /*************************************System Control*************************************/
-/*@*@*@*@*@*@*@*@* New *@*@*@*@*@*@*@*@*@*/
 #define RCC        *((vuint32*) (System_Control_Base_Address+0x060UL))
 #define GPIOHBCTL  *((vuint32*) (System_Control_Base_Address+0x06CUL))
 #define RCC2       *((vuint32*) (System_Control_Base_Address+0x070UL))
 #define SRGPIO     *((vuint32*) (System_Control_Base_Address+0x508UL))
 #define RCGCGPIO   *((vuint32*) (System_Control_Base_Address+0x608UL))
 
-/*@*@*@*@*@*@*@*@* Legacy *@*@*@*@*@*@*@*@*@*/ /*Used In Simulation*/
-#define SRCR2        *((vuint32*) (System_Control_Base_Address+0x048UL))
-#define RCGC2        *((vuint32*) (System_Control_Base_Address+0x108UL))
-
 
 /*************************************GPIO*************************************/
 /*@*@*@*@*@*@*@*@* APB *@*@*@*@*@*@*@*@*@*/
 #define GPIO_APB(X)  ((GPIO_Reg*)(X<4?((0x40004000UL)+((X)*0x1000UL)):((0x40024000UL)+((X-4)*0x1000UL))))
-#define GPIO_APB_TEST(X)  ((GPIO_Reg*)(X<4?((0x40004000UL)+((X)*0x1000UL)):((0x40024000UL)+((X-4)*0x1000UL))))
+
+
 // #define GPIOA_APB ((GPIO_Reg*) (GPIOA_Base_APB));
 // #define GPIOB_APB ((GPIO_Reg*) (GPIOB_Base_APB));
 // #define GPIOC_APB ((GPIO_Reg*) (GPIOC_Base_APB));
@@ -161,3 +167,7 @@ typedef union{
 // #define GPIOF_AHB ((GPIO_Reg*) (GPIOE_Base_AHB));
 // #define GPIOE_AHB ((GPIO_Reg*) (GPIOF_Base_AHB));
 #endif /*MCU_HW_H_*/
+
+/***************************************************************************************
+ *                               End of File: Mcu_Hw.h                                 *
+ ****************************************************************************************/

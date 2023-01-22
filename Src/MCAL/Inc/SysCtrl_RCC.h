@@ -1,3 +1,13 @@
+/***************************************************************************************
+ *                                  File Description                                   *
+ *  Name: SysCtrl_RCC.h                                                                *
+ *  Brief: System and Reset Control User Macros                                        *
+ *  Author: Ahmed M. Rizk                                                              *
+ *  Date: 17th of January 2023                                                         *
+ *                                                                                     *
+ * Details: ~Clock Enabling Macros                                                     *
+ *                                                                                     *
+ ****************************************************************************************/
 #ifndef SysCtrl_RCC_H_
 #define SysCtrl_RCC_H_
 
@@ -13,14 +23,16 @@
 /***************************Clock Enable Macros***************************/
 /*@*@*@*@*@*@*GPIO*@*@*@*@*@*@*/
 #define GPIO_EN(X)    SET_BIT(RCGCGPIO,X);
-//#define GPIO_EN(X)    SET_BIT(RCGC2,X); /*Legacy Used In Simulation*/
+
 
 /***************************Reset Macros***************************/
 /*@*@*@*@*@*@*GPIO*@*@*@*@*@*@*/
 #define GPIO_RESET(X) SET_BIT(SRGPIO,X);
-//#define GPIO_RESET(X) SET_BIT(SRCR2,X); /*Legacy Used In Simulation*/
+
 
 
 #endif /*SysCtrl_RCC_H_*/
 
-
+/***************************************************************************************
+ *                               End of File: SysCtrl_RCC.h                            *
+ ****************************************************************************************/
